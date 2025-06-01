@@ -40,6 +40,15 @@ extension TableVc : UITableViewDelegate, UITableViewDataSource {
         cell.tableImageView.image = tableRow.image
         return cell
     }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let detailVC = storyboard.instantiateViewController(withIdentifier: "SecondViewController") as! SecondViewController
+        let tableRow = fetchData()[indexPath.row]
+        detailVC.labelText = tableRow.title  
+        navigationController?.pushViewController(detailVC, animated: true)
+        
+    }
     
     func fetchData() -> [TableModel] {
         var data = [TableModel]()

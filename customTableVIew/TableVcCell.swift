@@ -9,6 +9,7 @@ import UIKit
 class TableVcCell: UITableViewCell {
     var titleView = UILabel()
     var tableImageView = UIImageView()
+    weak var delegate: CustomCellDelegate?
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -47,4 +48,9 @@ class TableVcCell: UITableViewCell {
         titleView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -12).isActive = true
     }
     
+}
+
+
+protocol CustomCellDelegate: AnyObject {
+    func didTapButton(in cell: TableVcCell)
 }
