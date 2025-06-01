@@ -9,16 +9,19 @@ import UIKit
 class TableVcCell: UITableViewCell {
     var titleView = UILabel()
     var tableImageView = UIImageView()
-    weak var delegate: CustomCellDelegate?
+    
+
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         addSubview(titleView)
         addSubview(tableImageView)
+        addSubview(checkboxButton)
         configureCellImgVIew()
         configureCellVIew()
         setImageConstraints()
         setTitleLabelConstraints()
+        setCheckboxConstraints()
     }
     
     required init?(coder: NSCoder) {
@@ -32,6 +35,15 @@ class TableVcCell: UITableViewCell {
         titleView.numberOfLines = 0
         
     }
+    var checkboxButton: UIButton = {
+            let button = UIButton(type: .custom)
+            button.translatesAutoresizingMaskIntoConstraints = false
+            // SF Symbols: empty box & checkmark box
+            button.setImage(UIImage(systemName: "square"), for: .normal)
+            button.setImage(UIImage(systemName: "checkmark.square.fill"), for: .selected)
+            button.tintColor = .systemBlue
+            return button
+        }()
     func setImageConstraints() {
         tableImageView.translatesAutoresizingMaskIntoConstraints = false
         tableImageView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
@@ -47,10 +59,12 @@ class TableVcCell: UITableViewCell {
         titleView.heightAnchor.constraint(equalToConstant: 80).isActive = true
         titleView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -12).isActive = true
     }
-    
+    func setCheckboxConstraints() {
+         checkboxButton.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+         checkboxButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -12).isActive = true
+         checkboxButton.widthAnchor.constraint(equalToConstant: 30).isActive = true
+         checkboxButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
+     }
 }
 
 
-protocol CustomCellDelegate: AnyObject {
-    func didTapButton(in cell: TableVcCell)
-}
