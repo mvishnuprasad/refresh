@@ -20,7 +20,8 @@ class SecondViewController: UIViewController {
     }
     @IBAction func backButtonTapped(sender : UIButton){
         buttonStatus.toggle()
-        delegate?.setStatus(buttonStatus, index: Int(String(labelText?.last ?? "0")) ?? 0)
+        let index = Int(labelText?.components(separatedBy: " ").last ?? "0") ?? 0
+        delegate?.setStatus(buttonStatus, index: index)
         navigationController?.popViewController(animated: true)
     }
     
